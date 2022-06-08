@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <h1>{{ schema|yesno:"Update,Create" }} Schema</h1>
+  <form action="" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Submit" class="btn btn-primary" style="float: right"/>
+    <br>
+    {{ form|crispy }}
+    {% if formset %}
+      <h3>Columns</h3>
+      {{ formset.management_form }}
+      <div id="column-form-list">
+        {% for form in formset %}
+          <p class="column-form">{{ form }}</p>
+        {% endfor %}
+      </div>
+      <p id="empty-form" class="hidden">{{ formset.empty_form }}</p>
+      <button id="add-column" type="button" class="btn btn-secondary btn-sm">
+        Add column
+      </button>
+    {% endif %}
+  </form>
+
+  <script>
+    const addColumnButton = document.getElementById('add-column');
+    const totalNewForms = document.getElementById('id_form-TOTAL_FORMS');
+    addColumnButton.addEventListener('click', add_new_form_1);
+    function add_new_form_1() {
+      const currentColumnForms = document.getElementsByClassName('column-form');
+      const currentFormCount = currentColumnForms.length;
+      const formCopyTarget = document.getElementById('column-form-list');
+      const copyEmptyFormEl = document.getElementById('empty-form').cloneNode(true);
+      copyEmptyFormEl.setAttribute('class', 'column-form');
+      copyEmptyFormEl.setAttribute('id', `form-${currentFormCount}`);
+      const regex = new RegExp('__prefix__', 'g');
+      copyEmptyFormEl.innerHTML = copyEmptyFormEl.innerHTML.replace(regex, currentFormCount);
+      totalNewForms.setAttribute('value', currentFormCount + 1);
+      formCopyTarget.append(copyEmptyFormEl)
+    }
+  </script>
+
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+{% endblock %}

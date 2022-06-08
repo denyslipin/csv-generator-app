@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    Schema name: {{ schema.name }}
+  </h1>
+  {% if schema.get_all_columns %}
+    <form class="form-inline" action="" method="POST">
+      {% csrf_token %}
+      <div class="form-group mx-sm-3 mb-2">
+        <input
+          type="number" name="rows" class="form-control"
+          value="1" min="1" step="1" placeholder="Number of rows" required
+        />
+      </div>
+      <div class="form-group mx-sm-3 mb-2">
+        <input type="submit" class="form-control btn btn-primary" value="Generate data"/>
+      </div>
+    </form>
+  {% else %}
+    <h4>To generate CSV file add some columns</h4>
+  {% endif %}
+  <p>Schema date: {{ schema.date }}</p>
+  <p>{{ schema.separator }}</p>
+  <h2>Columns</h2>
+  {% if schema.get_all_columns %}
+    {% for column in schema.get_all_columns %}
+      <p>Name: {{ column.name }} -- Type: {{ column.type }} -- Order: {{ column.order }}</p>
+    {% endfor %}
+  {% else %}
+    <p>There are no columns in the schema
+    <a
+      href="{% url "catalog:schema-update" pk=schema.id %}"
+      class="btn btn-secondary btn-sm"
+    >
+      Add columns
+    </a>
+  {% endif %}
+  <h3>Datasets</h3>
+  {% if schema.get_all_datasets %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Data</th>
+        <th>Status</th>
+        <th>Link</th>
+      </tr>
+      {% for dataset in schema.get_all_datasets %}
+        <tr>
+          <td>{{ dataset.id }}</td>
+          <td>{{ dataset.date }}</td>
+          <td>{{ dataset.status }}</td>
+          <td>
+            {% if dataset.csv_file %}
+              <a href="{{ dataset.csv_file.url }}" class="btn btn-primary">
+                Download
+              </a>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>There are no datasets in the schema</p>
+  {% endif %}
+{% endblock %}

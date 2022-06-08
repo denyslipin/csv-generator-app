@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>CSV generating Service Home</h1>
+  <p>Build an online service for generating CSV files using Python and Django</p>
+  <h2>Dynamic content</h2>
+  <p>CSV generating Service has the following record counts:</p>
+  <ul>
+    <li><strong>Schemas:</strong> {{ num_schemas }}</li>
+    <li><strong>Columns:</strong> {{ num_columns }}</li>
+    <li><strong>Datasets:</strong> {{ num_datasets }}</li>
+  </ul>
+
+  <p>You have visited this page
+      {{ num_visits }} time{{ num_visits|pluralize }}.
+  </p>
+  <a href="{% url "catalog:schema-create" %}" class="btn btn-primary">
+    Create Schema
+  </a>
+{% endblock %}

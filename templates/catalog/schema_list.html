@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    Schema List
+    <a
+      href="{% url "catalog:schema-create" %}"
+      class="btn btn-primary"
+      style="float: right"
+    >
+      Create Schema
+    </a>
+  </h1>
+  {% if schema_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Modified</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+      {% for schema in schema_list %}
+        <tr>
+          <td>{{ schema.id }}</td>
+          <td>
+            <a href="{% url "catalog:schema-detail" pk=schema.id %}"
+               class="btn btn-outline-primary"
+            >
+              {{ schema.name }}
+            </a>
+          </td>
+          <td>{{ schema.date }}</td>
+          <td>
+            <a
+              href="{% url "catalog:schema-update" pk=schema.id %}"
+              class="btn btn-secondary btn-sm"
+            >
+              Update
+            </a>
+          </td>
+          <td>
+            <a
+              href="{% url "catalog:schema-delete" pk=schema.id %}"
+              class="btn btn-danger btn-sm"
+            >
+              Delete
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+      <p>There are no schema in the catalog.</p>
+  {% endif %}
+{% endblock %}
