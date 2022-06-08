@@ -19,6 +19,7 @@ Django==3.2.13
 django-crispy-forms==1.14.0
 django-storages==1.12.3
 Faker==13.12.1
+gunicorn==20.1.0
 importlib-metadata==4.11.4
 jmespath==1.0.0
 kombu==5.2.4
