@@ -1,2 +1,2 @@
 web: gunicorn app.wsgi --log-file -
-celery -A app worker -l info --pool=solo
+worker: celery worker -A app -l info
