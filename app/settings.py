@@ -24,10 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get(
-    'SECRET_KEY',
-    'django-insecure-)odqt9t4oiv8a4(^$jffqc7h24-u#g5qxf0jp9otm*#sb-6$wr'
-)
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
@@ -155,12 +152,12 @@ STATIC_ROOT = "staticfiles/"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CELERY_BROKER_URL = os.environ.get('AWS_ACCESS_KEY_ID', 'rediss://:pcfaa8078bc94a3c3a9306983750bc6545f2ddc30a425f1439cb093c5fec14980@ec2-54-220-38-242.eu-west-1.compute.amazonaws.com:32080')
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
 
 # AWS S3 SETTINGS
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'AKIAVVOA3Q4I2RLPTPXD')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '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')
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'mediacsvfiles'
 AWS_QUERYSTRING_AUTH = False
