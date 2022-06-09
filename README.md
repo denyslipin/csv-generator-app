@@ -5,7 +5,7 @@ data using Python, Django and Celery
 
 ## Check it out!
 
-[Taxi-service project deploy to Heroku]()
+[Taxi-service project deploy to Heroku](https://csv-generator-application.herokuapp.com)
 
 ## Installation
 
@@ -25,9 +25,9 @@ celery -A app worker -l info --pool=solo
 
 ## Features
 
-* 
-* 
-* 
+* Authentication functionality for User
+* Managing schemas directly from website interface
+* Generating CSV files (datasets) with fake data
 
 ## Access
 
@@ -36,4 +36,4 @@ celery -A app worker -l info --pool=solo
 
 ## Demo
 
-![Website Interface]()
+![Website Interface](demo.png)
