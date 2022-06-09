@@ -5,7 +5,7 @@ data using Python, Django and Celery
 
 ## Check it out!
 
-[Taxi-service project deploy to Heroku](https://csv-generator-application.herokuapp.com)
+[CSV Generator APP deploy to Heroku](https://csv-generator-application.herokuapp.com)
 
 ## Installation
 
